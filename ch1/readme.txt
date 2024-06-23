@@ -71,4 +71,16 @@ if (this.$refs.form.validate()) { //validate()도 vuetify가 제공해주는 것
           })
 --
 위 .dispatch()가 promise처럼 비동기인것은, async 함수명(){ const result=await this.~~}처럼
-async/await로 바뀌써도 무방. 대신,await부분은 try-catch()해줘야. 왜냐면, 에러처리해야 해서. 2-3강. 14'00
+async/await로 바뀌써도 무방. 대신, 아래처럼 await부분은 try-catch()해줘야. 왜냐면, 에러처리해야 해서. 2-3강. 14'00
+
+async onSubmitForm() {
+  if (this.$refs.form.validate()) {
+   try{
+    const result = await this.$store.dispatch('users/signup', {
+      nickname: this.nickname,
+      email: this.email
+    });
+  }catch(err){
+
+  }
+  })
