@@ -34,14 +34,21 @@ export default {
       success:false
     }
   },
+
   computed:{
    // ...mapState(['users/me']); 아래와 같은것.
     ...mapState('users', ['me'])
   },
+
   methods: {
-    onChangeTextarea(){
+    onChangeTextarea(value){
       // <!--            :rules="[v => !!v.trim() || '내용을 입력하세요.']"--> 위 textarea에 들어가야 하는데, 에러 나서 뺌.
-      this.hideDetails=true; // textarea폼과 바로 버튼 사이의 공간. 2-4강.
+
+      if(value.length){
+        this.hideDetails=false;  // textarea폼과 바로 버튼 사이의 공간. 2-4강.
+        this.success=false;
+        this.successMessages='';
+      }
     },
     onSubmitForm(){
       if(this.$refs.form.validate()){
@@ -49,7 +56,6 @@ export default {
           content: this.content,
           User:{
             nickname: this.me.nickname,
-
           },
           Comments:[],
           Images:[],
@@ -57,6 +63,7 @@ export default {
           createdAt: Date.now()
         })
             .then(()=>{
+              this.content='';
               this.hideDetails=false;
               this.success=true;
               this.successMessages='게시글 등록 성공!';

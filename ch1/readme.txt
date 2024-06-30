@@ -27,7 +27,8 @@ vue.js @2,
 Nuxt@2
 
 
-
+  즉, 호출하는 쪽(signup.vue)에서 dispatch ->users.js의 actions --> users.js의
+  mutation -->users.js의 state를 변경함.
 
 ------------------------------------------------------------------------------------------
  <nuxt/> <--이건 <router-view/>역할 하는 것.
@@ -72,6 +73,46 @@ onSubmitForm() {
   this.$router.push({ <--a
     path:'/',
   })
+
+  --
+  users.js에서
+
+  순서
+  signup.vue에서
+  this.$store.dispatch('users/signup', {payload}}
+
+ users.js
+ export const actions={
+signUp({commit}, payload){
+ commit('setMe', payload);
+      },
+}
+
+ users.js의 mutations의 setMe(state, payload){}호출 <--이것이
+  export const state=()=>({ me : null});를 최종 호출함.
+
+  즉, 호출하는 쪽(signup.vue)에서 dispatch ->users.js의 actions --> users.js의
+  mutation -->users.js의 state를 변경함.
+
+--실제 users.js 아래--
+  export const state=()=>({
+      me : null,
+  });
+
+  export const mutations={ // mutations에는 비동기 작업 불가, actions에서 해야.
+      //  state안의 데이터들을 바꿀때는 mutations으로 바꾸어야.
+      setMe(state, payload){
+          state.me = payload;
+      }
+  };
+
+  export const actions={ //비동기적 작업. store의 state, mutations등을 실행시킬수도 있다.
+      // {commit}는 context안에 있는 것을 구조분해 할당한 것. 2-2강.
+      signUp({commit}, payload){ // context안에는 commit, dispatch, state, rootState, getters, rootGetters
+          // 서버에 회원가입 요청을 보내는 부분
+          commit('setMe', payload);
+      },
+
 ---
 
 if (this.$refs.form.validate()) { //validate()도 vuetify가 제공해주는 것. 위 valid의 참거짓 상태확인.

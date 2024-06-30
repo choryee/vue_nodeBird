@@ -54,9 +54,10 @@ export default {
       return this.$store.state.users.me;
     },
   },
+
   methods: {
     onSubmitForm() {
-      if (this.$refs.form.validate()) {
+      if (this.$refs.form.validate()) { // validate()는 nuxt에서 제공하는 듯.
         this.$store.dispatch('users/logIn', {
           email: this.email,
           nickname: '제로초',

@@ -9,12 +9,20 @@ export const state=()=>({
 export const mutations={
     addMainPost(state, payload){
         state.mainPosts.unshift(payload);
+    },
+    removeMainPost(state, payload){
+        const index = state.mainPosts.findIndex(v=>v.id === payload.id);
+        state.mainPosts.splice(index,1);
     }
 }
 
 export const actions={
     add({commit}, payload){
         //commit('posts/addMainPost'); 같은 파일안에서는 posts생략가능.
-        commit('addMainPost');
+        console.log(' posts/addMainPost\'  payload>>>',  payload);
+        commit('addMainPost', payload);
+    },
+    remove({commit}, payload){
+        commit('removeMainPost',payload);
     }
 }
