@@ -1,23 +1,35 @@
-nodeBird만들기  240621시작. 심한 장마 시작일에~~
+vue_nodeBird만들기  240621시작. 심한 장마 시작일에~~
 
 https://github.com/ZeroCho/vue-nodebird
 
-
-실행은 npm run dev
+http://localhost:3000
+실행은 npm run dev ( cd ch1/front에서)
 위는 package.json의
  "scripts": {
-     "dev": "nuxt"
+     "dev": "nuxt" <--  "scripts"부분에 넣어 주는게, npm run 뒤에 붙는 이름 됨.
    }, 부분임.
 
 
-nuxt - vue,js의 프레임워크로, vue 작업을 쉽게 해주는 것.
+nuxt <- vue,js의 프레임워크로, vue 작업을 쉽게 해주는 것. 아래의 기능들을 자동으로 해줌.
+- 원래 store에 정의된 것을 사용하는 .vue에서는
+import store from './store.js'하고,
+export default {
+store, // 이거해야, this.$store. 사용가능.  <-- 이거까지 넣어줘야 하는데,
+ }
+ (위 tictactoe.vue에서)
+ 지금 nuxt를 사용해서, 이 과정을 자동으로 해주는 것.
+- 왼쪽 pages아래 profile.vue이름은 자동으로 http://localhost:3000/profile 처럼 라우팅 해줌.
+
 
 기술스택
 Mysql @5.7
-vue.js @2, Nuxt@2
+vue.js @2,
+Nuxt@2
 
 
 
+
+------------------------------------------------------------------------------------------
  <nuxt/> <--이건 <router-view/>역할 하는 것.
 
 1-4강.
@@ -46,6 +58,8 @@ npm run lint <--- 터미널창에 코딩스타일 확인용으로만
 
 
 2-3강. 로그인/회원가입 더미 데이터 만들기.
+mutations, actions는 users.js의 주석을 보라.
+
 this.$store.dispatch('users/signup', { // dispatch는 store의 actions실행하는 것.
 })
 
@@ -84,3 +98,17 @@ async onSubmitForm() {
 
   }
   })
+
+ 2-4강. 게시글 작성 폼 만들기.
+ parameter.sms_yn = this.sms_yn || "N"; // sms설정 값 없는경우 default 값
+ ( this.sms_yn가 있으면, 그것을 사용하는데,) this.sms_yn가 거짓이여야(일때), parameter.sms_yn키에 "N"를 대입할 것이다. 의미
+ ->  this.sms_yn가 있으면 이거한다, 하지만 없으면 뒤에것 한다.
+
+ PostForm.vue
+ :rules="[v => !!v.trim() || '내용을 입력하세요']"
+ -> v의 공간을 제거한 것이 비어있을때,  '내용을 입력하세요'라고 표시한다.
+ -> 빈칸 제거한후에, 안 비어야(한 글짜라도 있어야 한다). 아니면, 뒤에 것 한다.
+
+
+
+

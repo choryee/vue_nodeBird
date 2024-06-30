@@ -1,8 +1,12 @@
+// 원래 store에 정의된 것을 사용하는 .vue에서는 import store from './store.js'하고,export default {
+//   store, // 이거해야, this.$store. 사용가능. 까지 넣어줘야 하는데, 지금 nuxt를 사용해서, 이 과정을 자동으로 해주는 것.
+
 export const state=()=>({
     me : null,
 });
 
-export const mutations={ // mutations에는 비동기 작업 불가, actions에서 해야
+export const mutations={ // mutations에는 비동기 작업 불가, actions에서 해야.
+    //  state안의 데이터들을 바꿀때는 mutations으로 바꾸어야.
     setMe(state, payload){
         state.me = payload;
     }
