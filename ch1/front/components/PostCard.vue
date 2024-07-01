@@ -8,6 +8,7 @@
           <div>{{post.content}}</div>
         </div>
       </v-card-text>
+
       <v-card-actions>
         <v-btn text color="orange">
           <v-icon>mdi-twitter-retweet</v-icon>
@@ -18,6 +19,7 @@
         <v-btn text color="orange" @click="onToggleComment">
           <v-icon>mdi-comment-outline</v-icon>
         </v-btn>
+
         <v-menu offset-y open-on-hover>
           <template v-slot:activator="{ on }">
             <v-btn text color="orange" v-on="on">
