@@ -33,6 +33,9 @@
 </template>
 
 <script>
+// xs, sm,md,lg,xl
+// cols가 xs라고 생각하라.그래서 22라인에 xs="12"생략가능.
+
 import 'vuetify/dist/vuetify.min.css';
 import LoginForm from "../components/LoginForm";
 

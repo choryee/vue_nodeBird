@@ -31,6 +31,7 @@
             <v-btn text color="orange" @click="onEditPost">수정</v-btn>
           </div>
         </v-menu>
+
       </v-card-actions>
     </v-card>
 

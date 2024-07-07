@@ -4,7 +4,7 @@
         v-model="content"
         filled
         auto-grow
-        label="댓글 달기"
+        label="댓글 달기 CommentForm.vue"
         :hide-details="hideDetails"
         :success="success"
         :success-messages="successMessages"

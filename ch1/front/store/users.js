@@ -3,17 +3,41 @@
 
 export const state=()=>({
     me : null,
+    followerList:[
+        {id:1, nickname:'zerocho'},{id:2, nickname: 'nero'},{id:3, nickname: 'heros'}
+    ],
+    followingList:[{id:1, nickname:'haha'},{id:2, nickname: 'new york'},{id:3, nickname: 'new jersy'}]
 });
 
 export const mutations={ // mutations에는 비동기 작업 불가, actions에서 해야.
     //  state안의 데이터들을 바꿀때는 mutations으로 바꾸어야.
     setMe(state, payload){
         state.me = payload;
-    }
+    },
+    changeNickname(state, payload){
+        state.me.nickname = payload.nickname;
+    },
+    addFollower(state, payload) {// 3-1강.
+        state.followerList.push(payload);
+    },
+    addFollowing(state, payload) {
+        state.followingList.push(payload);
+    },
+    removeFollower(state, payload) {
+        const index = state.followerList.findIndex(v => v.id === payload.id);
+        state.followerList.splice(index, 1);
+    },
+    removeFollowing(state, payload) {
+        const index = state.followingList.findIndex(v => v.id === payload.id);
+        state.followingList.splice(index, 1);
+    },
+
+
 };
 
-export const actions={ //비동기적 작업. store의 state, mutations등을 실행시킬수도 있다.
+export const actions={ //비동기적 작업 하는 곳. store의 state, mutations등을 실행시킬수도 있다.
     // {commit}는 context안에 있는 것을 구조분해 할당한 것. 2-2강.
+    // 서버 통신 할거면, actions로 만들라. 여기서 서버요청 보내는 것.
     signUp({commit}, payload){ // context안에는 commit, dispatch, state, rootState, getters, rootGetters
         // 서버에 회원가입 요청을 보내는 부분
         commit('setMe', payload);
@@ -23,5 +47,21 @@ export const actions={ //비동기적 작업. store의 state, mutations등을 �
     },
     logOut({commit}, payload){
         commit('setMe', null);
-    }
+    },
+    changeNickname({commit}, payload){
+        commit('changeNickname', payload);
+    },
+    addFollowing({ commit }, payload) {
+        commit('addFollowing', payload);
+    },
+    addFollower({ commit }, payload) {
+        commit('addFollower', payload);
+    },
+    removeFollowing({ commit }, payload) {
+        // 비동기 요청
+        commit('removeFollowing', payload);
+    },
+    removeFollower({ commit }, payload) {
+        commit('removeFollower', payload);
+    },
 }

@@ -151,5 +151,25 @@ async onSubmitForm() {
  -> 빈칸 제거한후에, 안 비어야(한 글짜라도 있어야 한다). 아니면, 뒤에 것 한다.
 
 
+2-7강 첨부터
+users.js에
+export const state=()=>({
+    me : null,
+    followerList:[],
+    followingList:[]
+});
+해서, 팔로어/팔로잉 수정하는 것 숙제. 04'50
+
+3-1강.
+위 숙제 강의함.
+Profile.vue에서
+<v-container>
+  <v-subheader>팔로잉</v-subheader>
+  <follow-list :users="followingList" :remove="removeFollowing"/>
+</v-container>
+위처럼, 함수도 props로 follow-list에 넘길수 있다.
 
 
+3-2. 첨부터 240707
+라우팅 미들웨어
+- 회원가입이 안 되어 있는데, 프로필 페이지 보이면 이상하다.
