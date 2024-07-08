@@ -53,6 +53,8 @@ export default {
       title: '프로필',
     };
   },
+  middleware: 'authenticated', // 3-2강.
+
   computed:{
     followerList(){
       return this.$store.state.users.followerList;

@@ -73,6 +73,23 @@ export default {
       ],
     };
   },
+
+  computed:{
+    me(){ // 3-2강.
+      return this.$store.state.users.me;
+    }
+  },
+
+  watch:{  // 3-2강.
+    me(value, oldValue){
+      if(value){ //value가 생긴 경우,
+        this.$router.push({
+          path:'/',
+        })
+      }
+    }
+  },
+
   methods: {
     onSubmitForm() {
       if (this.$refs.form.validate()) {
@@ -96,6 +113,9 @@ export default {
       title: '회원가입',
     };
   },
+
+
+  middleware: 'anonymous', // 3-2강.
 };
 </script>
 

@@ -19,7 +19,7 @@ store, // 이거해야, this.$store. 사용가능.  <-- 이거까지 넣어줘�
  (위 tictactoe.vue에서)
  지금 nuxt를 사용해서, 이 과정을 자동으로 해주는 것.
 - 왼쪽 pages아래 profile.vue이름은 자동으로 http://localhost:3000/profile 처럼 라우팅 해줌.
-
+- middleware도 마찬가지. 3-2강.첨.
 
 기술스택
 Mysql @5.7
@@ -170,6 +170,17 @@ Profile.vue에서
 위처럼, 함수도 props로 follow-list에 넘길수 있다.
 
 
-3-2. 첨부터 240707
-라우팅 미들웨어
+3-2. 라우팅 미들웨어 240707
 - 회원가입이 안 되어 있는데, 프로필 페이지 보이면 이상하다.
+
+watch:{  // 3-2강.
+    me(value, oldValue){
+      if(value){ //value가 생긴 경우, 즉, me 새로 바뀔때 마다, 실행하라.
+        this.$router.push({
+          path:'/',
+        })
+      }
+    }
+  },
+
+3-3강. 첨
