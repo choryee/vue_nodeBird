@@ -4,6 +4,7 @@ https://github.com/ZeroCho/vue-nodebird
 
 http://localhost:3000
 실행은 npm run dev ( cd ch1/front에서)
+
 위는 package.json의
  "scripts": {
      "dev": "nuxt" <--  "scripts"부분에 넣어 주는게, npm run 뒤에 붙는 이름 됨.
@@ -19,6 +20,7 @@ store, // 이거해야, this.$store. 사용가능.  <-- 이거까지 넣어줘�
  (위 tictactoe.vue에서)
  지금 nuxt를 사용해서, 이 과정을 자동으로 해주는 것.
 - 왼쪽 pages아래 profile.vue이름은 자동으로 http://localhost:3000/profile 처럼 라우팅 해줌.
+pages/post 이면, http://localhost:3000/post/ 이런식으로 됨.
 - middleware도 마찬가지. 3-2강.첨.
 
 기술스택
@@ -27,11 +29,14 @@ vue.js @2,
 Nuxt@2
 
 
-  즉, 호출하는 쪽(signup.vue)에서 dispatch ->users.js의 actions --> users.js의
-  mutation -->users.js의 state를 변경함.
+  즉, 호출하는 쪽(signup.vue)에서 dispatch함 ->users.js의 actions동작 --> users.js의
+  mutation동작 -->users.js의 state를 변경함.
 
 ------------------------------------------------------------------------------------------
- <nuxt/> <--이건 <router-view/>역할 하는 것.
+<nuxt/> <--이건 <router-view/>역할 하는 것.
+<nuxt-link :to="'/post/'+post.id">{{post.content}}</nuxt-link>
+ <v-btn nuxt to="/signup">회원가입</v-btn>
+
 
 1-4강.
 vuetity - boostrap같이 디자인 하는 쉽게 하라고, 이미 만들어진 것.
@@ -184,3 +189,38 @@ watch:{  // 3-2강.
   },
 
 3-3강. 첨
+동적라우팅
+localhost:3000/post/11
+<-- pages/post폴더가 위 주소 일부가 됨.
+
+import PostCard from "../../components/PostCard";
+import PostCard from "~/components/PostCard";
+<-- ~는 root부터 시작하라.
+
+경로 주소에서 위의 주소의 11을 가져오는 법.
+this.$route.params.id 으로 가져옴.
+
+
+3-4강. 인피니트 스크롤이 준비하기.
+- 리스트 10개 보고, 밑으로 내리면, 새로운 10개 다시 보기게 하는 것.
+
+posts.js에서
+export const state=()=>({
+    mainPosts: [],
+    hasMorePost: true, // 3-4강. 인피니티 스크롤이 준비하기.
+});
+
+3-5강. vitualized list.
+- 화면에 현재 안 보이는 게시물은 id로만 메모리에 가지고 있고, 스크롤 내리면 보이게.
+- 설명만 하고, 구현은 안 함.
+
+
+3-7. 더 보기 구현.
+3-8. 기타 라우트 구현하기.
+//  밑은 3-8강 <nuxt-link>
+//  <nuxt-link :to="'/post/'+post.id">{{post.content}}</nuxt-link> 3-8강에서 주석함
+
+3-9. QnA 첨부터
+
+
+

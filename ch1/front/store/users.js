@@ -3,11 +3,16 @@
 
 export const state=()=>({
     me : null,
-    followerList:[
-        {id:1, nickname:'zerocho'},{id:2, nickname: 'nero'},{id:3, nickname: 'heros'}
-    ],
-    followingList:[{id:1, nickname:'haha'},{id:2, nickname: 'new york'},{id:3, nickname: 'new jersy'}]
+    followerList:[],
+    followingList:[],
+    hasMoreFollower:true,
+    hasMoreFollowing:true
 });
+
+const totalFollowers = 8;
+const totalFollowings = 6;
+const limit =3;
+
 
 export const mutations={ // mutations에는 비동기 작업 불가, actions에서 해야.
     //  state안의 데이터들을 바꿀때는 mutations으로 바꾸어야.
@@ -32,6 +37,25 @@ export const mutations={ // mutations에는 비동기 작업 불가, actions에�
         state.followingList.splice(index, 1);
     },
 
+    loadFollowings(state) {// 3-7강.
+        const diff = totalFollowings - state.followingList.length;
+        const fakeUsers = Array(diff > limit ? limit : diff).fill().map(v => ({
+            id: Math.random().toString(),
+            nickname: Math.floor(Math.random() * 1000),
+        }));
+        state.followingList = state.followingList.concat(fakeUsers);
+        state.hasMoreFollowing = fakeUsers.length === limit;
+    },
+
+    loadFollowers(state) {
+        const diff = totalFollowers - state.followerList.length;
+        const fakeUsers = Array(diff > limit ? limit : diff).fill().map(v => ({
+            id: Math.random().toString(),
+            nickname: Math.floor(Math.random() * 1000),
+        }));
+        state.followerList = state.followerList.concat(fakeUsers);
+        state.hasMoreFollower = fakeUsers.length === limit;
+    },
 
 };
 
@@ -64,4 +88,10 @@ export const actions={ //비동기적 작업 하는 곳. store의 state, mutatio
     removeFollower({ commit }, payload) {
         commit('removeFollower', payload);
     },
+    loadFollowers({commit, state}, payload){
+        if(state.hasMoreFollower) commit('loadFollowers');
+    },
+    loadFollowings({commit, state}, payload){
+        if(state.hasMoreFollowing) commit('loadFollowings');
+    }
 }

@@ -1,13 +1,24 @@
-<template>
-  <v-list-title>
-    <ul>
-      <li v-for="user in users" :key="user.id">
-        <span>{{user.nickname}}</span>
-        <v-icon @click="remove(user.id)" >mdi-minus-circle-outline</v-icon>
-      </li>
-    </ul>
+//3-7강.에서 원래 화면에서 수정 가함.
 
-  </v-list-title>
+<template>
+  <v-list>
+    <v-col v-for="user in users" :key="user.id" cols="12" md="4" style="display: inline-block">
+      <v-list-item>
+        <v-list-item-avatar color="indigo">
+          <span class="white--text headline">{{user.nickname[0]}}</span>
+        </v-list-item-avatar>
+        <v-list-item-content>
+          <v-list-item-title>{{user.nickname}}</v-list-item-title>
+        </v-list-item-content>
+        <v-list-item-action>
+          <v-icon @click="remove(user.id)">mdi-minus-circle-outline</v-icon>
+        </v-list-item-action>
+      </v-list-item>
+
+    </v-col>
+
+  </v-list>
+
 </template>
 
 <script>

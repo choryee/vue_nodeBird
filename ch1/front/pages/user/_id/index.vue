@@ -1,6 +1,8 @@
+//3-3강.
+// post/_id/index.vue 나 그냥, post/_id.vue나 같은 기능함.
+
 <template>
   <div>
-    <post-form v-if="me" />
     <div>
       <post-card v-for="p in mainPosts" :key="p.id" :post="p" />
     </div>
@@ -9,13 +11,12 @@
 </template>
 
 <script>
-import PostCard from '../components/PostCard.vue';
-import PostForm  from "../components/PostForm.vue";
+import PostCard from '~/components/PostCard';
+
 
 export  default {
   components: {
     PostCard,
-    PostForm
   },
   data() {
     return {
@@ -38,7 +39,7 @@ export  default {
 
   fetch({store}) { // 3-5강. fetch() 이거 자체가, vue의 객체임.
     store.dispatch('posts/loadPosts');
-   // console.log('  store.dispatch(\'posts/loadPosts\'); >>>', store.dispatch('posts/loadPosts'));
+    // console.log('  store.dispatch(\'posts/loadPosts\'); >>>', store.dispatch('posts/loadPosts'));
   },
   mounted() {
     window.addEventListener('scroll', this.onScroll);
